@@ -1,0 +1,128 @@
+﻿@model MyAspNetCoreApp.Web.Models.AddBlogImage
+
+@{
+    ViewData["Title"] = "BlogAdd";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+<div class="page-header">
+    <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white mr-2">
+            <i class="mdi mdi-new-box"></i>
+        </span> İçerik Oluştur
+    </h3>
+
+</div>
+<head>
+    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
+
+</head>
+<body>
+    @using (Html.BeginForm("BlogAdd", "Blog", new { enctype = "multipart/form-data" }, FormMethod.Post))
+{
+        <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <div class="forms-sample" >
+                        <div class="form-group">
+                            <label for="exampleInputName1">Başlık</label>
+                            @Html.TextBoxFor(x=>x.BlogTitle,new{@class="form-control"})
+                            @Html.ValidationMessageFor(x=>x.BlogTitle,"",new{@class="text-danger"})
+
+                        </div>
+                         <div class="form-group">
+                        <label>Küçük Fotoğraf</label>
+                        <br/>
+                            <input type="file" name="BlogThumbnailImage" />
+
+                            @Html.ValidationMessageFor(x=>x.BlogThumbnailImage,"",new{@class="text-danger"})
+
+                    </div>
+
+                        <div class="form-group">
+                            <label>Ana Resim</label>
+                            <br />
+                            <input type="file" name="BlogImage" />
+
+                            @Html.ValidationMessageFor(x=>x.BlogImage,"",new{@class="text-danger"})
+
+                        </div>
+
+                       @* <div class="form-group">
+                            <label for="exampleInputEmail3"> Küçük Görsel</label>
+                            @Html.TextBoxFor(x=>x.BlogThumbnailImage,new{@class="form-control"})
+                            @Html.ValidationMessageFor(x=>x.BlogThumbnailImage,"",new{@class="text-danger"})
+
+
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail3">Ana Görsel</label>
+                            @Html.TextBoxFor(x=>x.BlogImage,new{@class="form-control"})
+                            @Html.ValidationMessageFor(x=>x.BlogImage,"",new{@class="text-danger"})
+                   
+
+
+                        </div>*@
+                        <div class="form-group">
+                            <label for="exampleInputEmail3">Kategori</label>
+                            @Html.DropDownListFor(x=>x.CategoryID,(List<SelectListItem>)ViewBag.cv,new{@class="form-control"})
+
+
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail3">İçerik</label>
+                            @Html.TextAreaFor(x=>x.BlogContent,15,3,new{@class="form-control"})
+                            @Html.ValidationMessageFor(x=>x.BlogContent,"",new{@class="text-danger"})
+
+
+                        </div>
+                        <button type="submit" class="btn btn-success submit mb-4" id="blogaddbtn" onclick="addBlog()">Oluştur</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+   @* <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label for="validationCustom01">Başlık</label>
+
+            @Html.TextBoxFor(x=>x.BlogTitle,new{@class="form-control"})
+            @Html.ValidationMessageFor(x=>x.BlogTitle,"",new{@class="text-danger"})
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="validationCustom02">Görsel</label>
+
+            @Html.TextBoxFor(x=>x.BlogImage,new{@class="form-control"})
+            @Html.ValidationMessageFor(x=>x.BlogImage,"",new{@class="text-danger"})
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="validationCustom02">Küçük Görsel</label>
+
+            @Html.TextBoxFor(x=>x.BlogThumbnailImage,new{@class="form-control"})
+            @Html.ValidationMessageFor(x=>x.BlogThumbnailImage,"",new{@class="text-danger"})
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="validationCustom02">Kategori</label>
+
+            @Html.DropDownListFor(x=>x.CategoryID,(List<SelectListItem>)ViewBag.cv,new{@class="form-control"})
+         
+        </div>
+        
+        <div class="col-md-6 mb-3">
+            <label for="validationCustom02">İçerik</label>
+
+            @Html.TextAreaFor(x=>x.BlogContent,15,3,new{@class="form-control"})
+            @Html.ValidationMessageFor(x=>x.BlogContent,"",new{@class="text-danger"})
+        </div>
+    </div>
+
+
+        <button type="submit" class="btn btn-success submit mb-4" id="blogaddbtn" onclick="addBlog()">Oluştur</button>*@
+}
+
+
+</body>

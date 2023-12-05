@@ -1,0 +1,59 @@
+﻿@model MyAspNetCoreApp.Web.Models.AddProfileImage
+@{
+    ViewData["Title"] = "AddWriter";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Yazar Ekle</h2>
+
+    </div>
+</div>
+
+<br />
+<form class="form-group" method="post" enctype="multipart/form-data">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                @Html.HiddenFor(x=>x.WriterID,new{@class="form-control"})
+
+                <div class="form-group">
+                    <label for="exampleInputName1">Ad Soyad</label>
+                    @Html.TextBoxFor(x=>x.WriterName,new{@class="form-control"})
+                    @Html.ValidationMessageFor(x=>x.WriterName,"",new{@class="text-danger"})
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail3">Mail</label>
+                    @Html.TextBoxFor(x=>x.WriterMail,new{@class="form-control",type="email"})
+                    @Html.ValidationMessageFor(x=>x.WriterMail,"",new{@class="text-danger"})
+
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleInputPassword4">Şifre</label>
+                    @Html.PasswordFor(x=>x.WriterPassword,new{@class="form-control",})
+                    @Html.ValidationMessageFor(x=>x.WriterPassword,"",new{@class="text-danger"})
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword4">Tekrar Şifre</label>
+                    @Html.PasswordFor(x=>x.WriterConfirmPassword,new{@class="form-control",})
+                    @Html.ValidationMessageFor(x=>x.WriterConfirmPassword,"",new{@class="text-danger"})
+                </div>
+
+                <div class="form-group">
+                    <label>Profil fotoğrafı</label>
+                    <input type="file" name="WriterImage" />
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleTextarea1">Hakkımda</label>
+                    @Html.TextAreaFor(x=>x.WriterAbout,6,3,new{@class="form-control"})
+                </div>
+                <button type="submit" class="btn btn-success mr-2 ">Kaydet</button>
+                <a href="/Admin/Writer/Index/" class="btn btn-danger">İptal</a>
+
+            </div>
+        </div>
+    </div>
+</form>

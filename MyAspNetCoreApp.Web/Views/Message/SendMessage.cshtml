@@ -1,0 +1,81 @@
+﻿@model EntityLayer.Concrete.Message2
+@{
+    ViewData["Title"] = "SendMessage";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+<div class="page-header">
+    <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white mr-2">
+            <i class="mdi mdi-new-box"></i>
+        </span> Yeni Mesaj Oluştur
+    </h3>
+
+</div>
+<head>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
+
+</head>
+<body>
+    @using (Html.BeginForm("SendMessage", "Message", FormMethod.Post))
+    {
+         <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <form class="forms-sample" >
+                    <div class="form-group">
+                        <label for="exampleInputName1">Alıcı</label>
+                        @Html.TextBoxFor(x=>x.ReceiverID,new{@class="form-control"})
+                   
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Konu</label>
+                        @Html.TextBoxFor(x=>x.Subject,new{@class="form-control",type="email"})
+            
+
+                    </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail3">Mesaj</label>
+                            @Html.TextAreaFor(x=>x.MessageDetails,15,3,new{@class="form-control",type="email"})
+
+
+                        </div>
+                        <button type="submit" class="btn btn-success submit mb-4">Gönder</button>
+                </form>
+            </div>
+        </div>
+    </div>
+@*
+        <div class="form-row">
+            <div class="col-md-6 mb-3">
+                <label for="validationCustom01">Alıcı</label>
+
+                @Html.TextBoxFor(x=>x.ReceiverID,new{@class="form-control"})
+              
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="validationCustom01">Konu</label>
+
+                @Html.TextBoxFor(x=>x.Subject,new{@class="form-control"})
+
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="validationCustom01">Mesaj</label>
+
+                @Html.TextAreaFor(x=>x.MessageDetails,15,3,new{@class="form-control"})
+
+            </div>
+      
+        </div>
+
+
+        <button type="submit" class="btn btn-success submit mb-4">Gönder</button>*@
+    }
+
+
+</body>
+

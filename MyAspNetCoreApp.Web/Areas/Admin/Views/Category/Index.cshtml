@@ -1,0 +1,130 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@model IPagedList<EntityLayer.Concrete.Category>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<head>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
+
+
+</head>
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Kategoriler</h2>
+
+    </div>
+
+
+</div>
+<div class="ibox ">
+
+    <div class="ibox-content">
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Adı</th>
+                    <th>Açıklama</th>
+                    <th>Durum</th>
+                    <th>Sil</th>
+                    <th>Pasif Yap</th>
+                    <th>Aktif Yap</th>
+                    <th>Düzenle</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.CategoryID</td>
+                        <td>@item.CategoryName</td>
+                        <td>@item.CategoryDescription</td>
+
+                        @if (item.CategoryStatus == true)
+                        {
+                            <td style="color:green;">Aktif</td>
+                        }
+                        else
+                        {
+                            <td style="color:red;">Pasif</td>
+                        }
+
+                        <td><a onclick="deleteCategory('@item.CategoryID')" class="btn btn-danger">Sil</a></td>
+                        <td><a href="/Admin/Category/CategoryStatusF/@item.CategoryID" class="btn btn-danger">Pasif</a></td>
+                        <td><a href="/Admin/Category/CategoryStatusT/@item.CategoryID" class="btn btn-success">Aktif</a></td>
+                        <td><a href="#" class="btn btn-warning">Düzenle</a></td>
+
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+</div>
+@*<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Adı</th>
+        <th>Açıklama</th>
+        <th>Durum</th>
+        <th>Sil</th>
+        <th>Pasif Yap</th>
+        <th>Aktif Yap</th>
+        <th>Düzenle</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.CategoryID</td>
+            <td>@item.CategoryName</td>
+            <td>@item.CategoryDescription</td>
+          
+                                            @if (item.CategoryStatus == true)
+                                            {
+                                            <td style="color:green;">Aktif</td>
+                                            }
+                                            else
+                                            {
+                                            <td style="color:red;">Pasif</td>
+                                            }
+
+            <td><a onclick="deleteCategory('@item.CategoryID')" class="btn btn-danger">Sil</a></td>
+            <td><a href="/Admin/Category/CategoryStatusF/@item.CategoryID" class="btn btn-danger">Pasif</a></td>
+            <td><a href="/Admin/Category/CategoryStatusT/@item.CategoryID"  class="btn btn-success">Aktif</a></td>
+            <td><a href="#" class="btn btn-warning">Düzenle</a></td>
+
+        </tr>
+    }
+</table>*@
+<a href="/Admin/Category/AddCategory" class="btn btn-primary">Oluştur</a>
+<br />
+<br />
+@Html.PagedListPager((IPagedList)Model,page=>Url.Action("Index", new {page}))
+
+<script>
+    function deleteCategory(categoryId) {
+        Swal.fire({
+            title: "Emin misin?",
+            text: "Bu işlem geri alınamaz!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            confirmButtonText: "Sil",
+            cancelButtonText: "İptal"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "/Admin/Category/CategoryDelete/" + categoryId;
+            }
+        });
+    }
+</script>

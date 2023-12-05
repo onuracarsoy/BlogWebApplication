@@ -1,0 +1,29 @@
+﻿@model EntityLayer.Concrete.Message2
+
+
+
+
+@{
+    ViewData["Title"] = "MessageDetails";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+
+
+<div class="row">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex">
+                    <div class="mb-0 flex-grow">
+                        <h6>Konu: @Model.Subject </h6>
+                        <p class="mb-0 font-weight-light">@Model.MessageDetails</p>
+                        <h6 style="color: limegreen;">@Model.MessageDate.ToLongDateString()</h6>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<a href="/Message/InBox/" class ="btn btn-success">Geri Dön</a>

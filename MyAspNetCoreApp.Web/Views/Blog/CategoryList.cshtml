@@ -1,0 +1,47 @@
+﻿@using EntityLayer.Concrete
+@model List<Category>
+@{
+    ViewData["Title"] = "CategoryList";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+
+<section class="main-content-w3layouts-agileits">
+    <div class="container">
+        <div class="row inner-sec">
+            <div class="col-lg-8 left-blog-info-w3layouts-agileits text-left">
+                 @foreach (var item in Model)
+                    {
+                <ul class="list-group single">
+                    
+                        <li class="list-group-item d-flex">
+                            <a href="@Url.Action("BlogListByCategory", "Blog", new { id = item.CategoryID })"><h6>@item.CategoryName</h6></a>
+                        </li>
+                </ul>
+                
+                }
+                </br>
+            </div>
+
+            <aside class="col-lg-4 agileits-w3ls-right-blog-con text-left">
+                <div class="right-blog-info text-left">
+
+                    @await Html.PartialAsync("~/Views/NewsLetter/SubscribeMail.cshtml")
+                    @await Component.InvokeAsync("CategoryList")
+
+                    @*haftanın yeni içerikleri*@
+                    @await Component.InvokeAsync("BlogLast3Post")
+
+
+
+
+
+                </div>
+            </aside>
+        </div>
+    </div>
+</section>
+
+
+
+

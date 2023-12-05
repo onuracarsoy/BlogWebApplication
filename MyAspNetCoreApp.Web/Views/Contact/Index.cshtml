@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+	
+	
+    <link href="~/webcore/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/webcore/css/contact.css" rel="stylesheet" />
+    <link href="~/webcore/css/fontawesome-all.css" rel="stylesheet" />
+    <link href="~/webcore/css/style.css" rel="stylesheet" />
+    <link href="//fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800"
+          rel="stylesheet">
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+	
+</head>
+
+<body>
+	
+	<section class="main-content-w3layouts-agileits">
+
+		<div class="ad-inf-sec bg-light">
+			<div class="container">
+				<div class="address row">
+
+					<div class="col-lg-4 address-grid">
+						<div class="row address-info">
+					
+						
+						</div>
+
+					</div>
+					<div class="col-lg-4 address-grid">
+						<div class="row address-info">
+							
+							</div>
+							<div class="col-md-8 address-right text-left">
+
+								<h3 class="tittle">İletişim</h3>
+								<p class="sub text-center">Bana Ulaş !</p>
+								
+
+							</div>
+
+						</div>
+					</div>
+					<div class="col-lg-4 address-grid">
+						<div class="row address-info">
+						
+						
+
+						</div>
+					</div>
+				</div>
+			</div>
+		
+		<div class="container">
+			<div class="contact_grid_right">
+				<form  method="post">
+					<div class="row contact_left_grid">
+						<div class="col-md-6 con-left">
+							<div class="form-group">
+								<label for="validationCustom01 my-2">Adınız</label>
+								<input class="form-control" type="text" name="ContactUserName" placeholder="" required="">
+							</div>
+							<div class="form-group">
+								<label for="exampleFormControlInput1">Mail</label>
+								<input class="form-control" type="email" name="ContactMail" placeholder="" required="">
+							</div>
+							<div class="form-group">
+								<label for="validationCustom03 my-2">Konu</label>
+								<input class="form-control" type="text" name="ContactSubject" placeholder="" required="">
+							</div>
+						</div>
+						<div class="col-md-6 con-right">
+							<div class="form-group">
+								<label for="textarea">Mesaj</label>
+								<textarea id="textarea" placeholder="" name="ContactMessage"></textarea>
+							</div>
+							<input id="contactbtn"class="form-control" type="submit" value="Gönder">
+
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</section>
+	
+	<script>
+		$('#contactbtn').click(function () {
+
+			swal({
+				title: "Teşekkürler!",
+				text: "Mesajınız gönderildi, en kısa zamanda geri dönüş yapılacaktır.",
+				icon: "success",
+				timer: 7000, 
+				buttons: false, 
+			});
+		});
+	</script>
+
+
+
+</body>
+
+</html>
+

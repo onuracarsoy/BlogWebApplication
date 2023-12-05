@@ -1,0 +1,74 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Bootstrap4.Core
+@model IPagedList<EntityLayer.Concrete.Message2>
+@{
+    ViewData["Title"] = "SendBox";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+
+<div class="page-header">
+    <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white mr-2">
+            <i class="mdi mdi-inbox"></i>
+        </span> Giden Kutusu
+    </h3>
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+           
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                              
+                                <th> Konu </th>
+                                <th> Gönderme Tarihi </th>
+                                <th> Detaylar </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+
+
+                                <tr>
+                                    <td>
+
+                                        <label>@item.Subject</label>
+                                    
+                                    
+                                    </td>
+                                    <td> 
+                                        @item.MessageDate.ToShortDateString() 
+
+                                    </td>
+
+                                    <td><a href="/Message/MessageDetails/@item.MessageID" class="btn btn-dark">Mesajı Oku</a></td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    @Html.PagedListPager((IPagedList)Model,page=>Url.Action("SendBox", new {page}),Bootstrap4PagedListRenderOptions.ClassicPlusFirstAndLast)

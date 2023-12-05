@@ -1,0 +1,176 @@
+﻿@model IEnumerable<EntityLayer.Concrete.Blog>
+
+@{
+    ViewData["Title"] = "BlogReadAll";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+
+
+
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</head>
+
+
+<body>
+	<!--Header-->
+
+	
+	<!--//header-->
+	
+
+	<!--//banner-->
+	<section class="banner-bottom">
+		<!--/blog-->
+		<div class="container">
+			<div class="row">
+				<!--left-->
+				<div class="col-lg-8 left-blog-info-w3layouts-agileits text-left">
+					@foreach(var item in Model)
+					{
+					
+					<div class="blog-grid-top">
+						<div class="b-grid-top">
+							<div class="blog_info_left_grid">
+								<a >
+									<img src="~/webcore/images/b1.jpg" class="img-fluid" alt="">
+								</a>
+							</div>
+							<div class="blog-info-middle">
+								<ul>
+									<li>
+										<a href="#">
+												<i class="far fa-calendar-alt"></i> @(((DateTime)item.CreateDate).ToString("dd-MMM-yyyy"))
+										</a>
+									</li>
+									<li class="mx-2">
+										<a href="#">
+											<i class="far fa-thumbs-up"></i> 201 Likes
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="far fa-comment"></i> 15 Comments
+										</a>
+									</li>
+
+								</ul>
+							</div>
+						</div>
+
+						<h3>
+							<a href="single.html">@item.BlogTitle </a>
+						</h3>
+						<p>
+							@item.BlogContent
+						</p>
+						
+					</div>
+					}
+
+					@await Component.InvokeAsync("CommentListByBlog",new {id = ViewBag.i})
+	
+					@await Html.PartialAsync("~/Views/Comment/PartialAddComment.cshtml",new {id = ViewBag.i})
+					
+				</div>
+				
+				
+				
+
+				<!--//left-->
+				<!--right-->
+				<aside class="col-lg-4 agileits-w3ls-right-blog-con text-right">
+					<div class="right-blog-info text-left">
+						
+						
+						@await Component.InvokeAsync("CategoryList")
+				        @await Component.InvokeAsync("WriterLastBlog")
+
+						@await Component.InvokeAsync("BlogLast3Post")
+					</div>
+
+				</aside>
+				<!--//right-->
+			</div>
+		</div>
+	</section>
+	<!--//main-->
+	<!--footer-->
+	
+	<!---->
+	<!-- js -->
+	<script src="js/jquery-2.2.3.min.js"></script>
+	<!-- //js -->
+	<!--/ start-smoth-scrolling -->
+	<script src="js/move-top.js"></script>
+	<script src="js/easing.js"></script>
+	<script>
+		jQuery(document).ready(function ($) {
+			$(".scroll").click(function (event) {
+				event.preventDefault();
+				$('html,body').animate({
+					scrollTop: $(this.hash).offset().top
+				}, 900);
+			});
+		});
+	</script>
+	<!--// end-smoth-scrolling -->
+
+	<script>
+		$(document).ready(function () {
+			/*
+									var defaults = {
+										containerID: 'toTop', // fading element id
+										containerHoverID: 'toTopHover', // fading element hover id
+										scrollSpeed: 1200,
+										easingType: 'linear'
+									};
+									*/
+
+			$().UItoTop({
+				easingType: 'easeOutQuart'
+			});
+
+		});
+	</script>
+	<a href="#home" class="scroll" id="toTop" style="display: block;">
+		<span id="toTopHover" style="opacity: 1;"> </span>
+	</a>
+
+	<!-- //Custom-JavaScript-File-Links -->
+	<script src="js/bootstrap.js"></script>
+
+	<script>
+		//formun submit olayını dinleyelim
+		$("#comment-form").submit(function (e) {
+			e.preventDefault(); //sayfanın yenilenmesini önleyelim
+
+			var form = $(this);
+			var url = form.attr('action'); //formun gönderileceği adresi alalım
+			var formData = form.serialize(); //form verilerini alalım
+
+			//ajax post işlemini gerçekleştirelim
+			$.ajax({
+				type: 'POST',
+				url: url,
+				data: formData,
+				success: function (result) {
+					location.reload();
+				},
+				error: function (xhr, status, error) {
+					alert("Yorum gönderme işlemi başarısız oldu.");
+				}
+			});
+		});
+
+	</script>
+
+</body>
+
+</html>
+

@@ -1,0 +1,79 @@
+﻿@model EntityLayer.Concrete.Writer
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<a href="~/lib/jquery/dist/jquery.min.map"></a>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+
+<section class="main-content-w3layouts-agileits">
+    <div class="container">
+        <h3 class="tittle">Kayıt Ol</h3>
+        <div class="inner-sec">
+            <div class="login p-5 bg-light mx-auto mw-100">
+                @using (Html.BeginForm("Index", "RegisterUser", FormMethod.Post))
+                {
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Adınız Soyadınız</label>
+                            @Html.TextBoxFor(x=>x.WriterName , new {@class="form-control"})
+                            <p style="color:red">@Html.ValidationMessageFor(x=>x.WriterName) </p> 
+         
+
+
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Mail</label>
+                            @Html.TextBoxFor(x=>x.WriterMail , new {@class="form-control"})
+                            <p style="color:red">@Html.ValidationMessageFor(x=>x.WriterMail) </p>
+
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputPassword1 mb-2">Şifre</label>
+                            @Html.TextBoxFor(x=>x.WriterPassword , new {@class="form-control"})
+                            <p style="color:red">@Html.ValidationMessageFor(x=>x.WriterPassword )</p>
+                            <p style="color:limegreen">*Şifre,en az bir büyük harf </p>
+                            <p style="color:limegreen">*en az bir küçük harf </p>
+                            <p style="color:limegreen">*en az bir sayı içermelidir </p>
+                         
+
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="exampleInputPassword2 mb-2">Tekrar Şifre</label>
+                            @Html.TextBoxFor(x=>x.WriterConfirmPassword , new {@class="form-control"})
+                            <p style="color:red">@Html.ValidationMessageFor(x=>x.WriterConfirmPassword) </p>
+
+
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary submit mb-4" id="registerbtn">Kaydol</button>
+                    <p>
+                        <a href="#" id="privacybtn">Kaydol'a tıklayarak, şartlarınızı kabul ediyorum</a>
+                    </p>
+                }
+            </div>
+
+
+        </div>
+    </div>
+    </div>
+
+
+
+</section>
+
+<script>
+    $('#privacybtn').click(function () {
+
+        swal({
+            title: "Gizlilik Şartları",
+            text: "blabla",
+            button: "Okudum",
+        });
+    });
+</script>

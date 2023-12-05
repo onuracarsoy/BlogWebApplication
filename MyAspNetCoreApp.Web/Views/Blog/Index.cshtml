@@ -1,0 +1,143 @@
+﻿
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Bootstrap4.Core
+@model IPagedList<EntityLayer.Concrete.Blog>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/UserLayout.cshtml";
+}
+<head>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+	
+</head>
+
+<section class="main-content-w3layouts-agileits">
+	<div class="container">
+		<h3 class="tittle">Gündemdekiler</h3>
+		<div class="row inner-sec">
+			<!--left-->
+
+			<div class="col-lg-8 left-blog-info-w3layouts-agileits text-left">
+				@foreach(var item in Model)
+			{
+				<article class="blog-grid-top">
+					<div class="b-grid-top">
+						<div class="blog_info_left_grid">
+								<a href="/Blog/BlogReadAll/@item.BlogID/">
+								<img  src="@item.BlogImage" class="img-fluid" alt="">
+							</a>
+						</div>
+						<div class="blog-info-middle">
+							<ul>
+								<li>
+										<a href="#">
+											<i class="far fa-eye"></i> • @item.Category.CategoryName  
+										</a>
+								</li>
+									<li>
+										<a href="#">
+											
+										</a>
+									</li>
+								
+								<li>
+									
+										<a href="#">
+											<i class="far fa-calendar-alt"></i> @(((DateTime)item.CreateDate).ToString("dd-MMM-yyyy"))
+										</a>
+								</li>
+
+							</ul>
+						</div>
+					</div>
+
+					<h3>
+							<a href="/Blog/BlogReadAll/@item.BlogID/">@item.BlogTitle </a>
+					</h3>
+					<p>
+						@item.BlogContent.Substring(0,200)...
+					</p>
+					<a href="/Blog/BlogReadAll/@item.BlogID/" class="btn btn-primary read-m">Devamını Oku</a>
+				</article>
+				}
+					
+				<nav aria-label="Page navigation example">
+						
+				@*	<ul class="pagination justify-content-left">
+						<li class="page-item disabled">
+							<a class="page-link" href="#" tabindex="-1">Previous</a>
+						</li>
+						<li class="pagenation-container ">
+							
+							@Html.PagedListPager((IPagedList)Model,page=>Url.Action("Index", new {id =ViewBag.CategoryID,page, @class = "pagedListPager"}))
+                                  
+							</li>
+							</ul>*@
+
+					@Html.PagedListPager((IPagedList)Model,page=>Url.Action("Index", new {id =ViewBag.CategoryID,page}), Bootstrap4PagedListRenderOptions.ClassicPlusFirstAndLast)
+					
+					
+					
+                                
+        
+				</nav>
+			</div>
+
+			
+			<!--//left-->
+			<!--right-->
+			<aside class="col-lg-4 agileits-w3ls-right-blog-con text-left">
+				<div class="right-blog-info text-left">
+					
+					@await Html.PartialAsync("~/Views/NewsLetter/SubscribeMail.cshtml")
+					@await Component.InvokeAsync("CategoryList")
+
+					@*haftanın yeni içerikleri*@
+					@await Component.InvokeAsync("BlogLast3Post")
+				
+				
+
+				
+				
+				</div>
+			</aside>
+			<!--//right-->
+		</div>
+	</div>
+</section>
+
+
+<script>
+	$(document).ready(function () {
+		$("#subscription-form").submit(function (event) {
+			event.preventDefault(); // formun normal post işlemi engellenir
+
+			var formData = $("#subscription-form").serialize(); // form verilerini toplar
+
+			$.ajax({
+				type: "POST",
+				url: "@Url.Action("SubscribeMail", "NewsLetter")", // controller action'ının URL'si
+				data: formData,
+				success: function (result) {
+					swal({
+						title: "Başarılı!",
+						text: "Abonelik işlemi başarıyla gerçekleştirildi!",
+						icon: "success",
+						timer: 3000,
+						buttons: false,
+					}).then(function () {
+						window.location.href = "@Url.Action("Index", "Blog")";
+					});
+				},
+				error: function (xhr, status, error) {
+					// post işlemi başarısız olduğunda yapılacak işlemler
+				}
+			});
+		});
+	});
+</script>

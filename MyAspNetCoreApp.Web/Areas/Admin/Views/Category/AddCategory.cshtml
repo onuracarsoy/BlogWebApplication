@@ -1,0 +1,36 @@
+﻿@model EntityLayer.Concrete.Category
+@{
+    ViewData["Title"] = "AddCategory";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Kategori Ekle</h2>
+
+    </div>
+</div>
+
+<br />
+@using (Html.BeginForm("AddCategory", "Category", FormMethod.Post))
+{
+    <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label for="validationCustom01">Ad</label>
+
+            @Html.TextBoxFor(x=>x.CategoryName,new{@class="form-control"})
+            @Html.ValidationMessageFor(x=>x.CategoryName,"",new{@class="text-danger"})
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="validationCustom02">Açıklama</label>
+
+            @Html.TextBoxFor(x=>x.CategoryDescription,new{@class="form-control"})
+            @Html.ValidationMessageFor(x=>x.CategoryDescription,"",new{@class="text-danger"})
+        </div>
+
+    </div>
+
+
+    <button type="submit" class="btn btn-success submit mb-4" id="blogaddbtn" href="/Admin/Category/AddCategory">Oluştur</button>
+    <a class="btn btn-danger submit mb-4" href="/Admin/Category/Index">İptal</a>
+ 
+}

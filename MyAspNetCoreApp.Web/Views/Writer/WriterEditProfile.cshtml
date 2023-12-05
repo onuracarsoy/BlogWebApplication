@@ -1,0 +1,70 @@
+﻿@model EntityLayer.Concrete.Writer
+
+@{
+    ViewData["Title"] = "WriterEditProfile";
+    Layout = "~/Views/Shared/WriterLayout.cshtml";
+}
+<head>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.min.css">
+
+</head>
+<div class="page-header">
+    <h3 class="page-title">
+        <span class="page-title-icon bg-gradient-primary text-white mr-2">
+            <i class="mdi mdi-settings menu-icon"></i>
+        </span> Profilim
+    </h3>
+
+</div>
+@await Component.InvokeAsync("WriterAboutOnDashboard")
+@using (Html.BeginForm("WriterEditProfile", "Writer", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                @Html.HiddenFor(x=>x.WriterID,new{@class="form-control"})
+                <form class="forms-sample">
+                    <div class="form-group">
+                        <label for="exampleInputName1">Ad Soyad</label>
+                        @Html.TextBoxFor(x=>x.WriterName,new{@class="form-control"})
+                        @Html.ValidationMessageFor(x=>x.WriterName,"",new{@class="text-danger"})
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail3">Mail</label>
+                        @Html.TextBoxFor(x=>x.WriterMail,new{@class="form-control",type="email"})
+                        @Html.ValidationMessageFor(x=>x.WriterMail,"",new{@class="text-danger"})
+
+                    </div>
+
+                    <div class="form-group">
+                        <label>Profil fotoğrafı</label>
+                        <br />
+                        <input type="file" name="WriterImage" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleTextarea1">Hakkımda</label>
+                        @Html.TextAreaFor(x=>x.WriterAbout,6,3,new{@class="form-control"})
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword4">Şifre</label>
+                        @Html.PasswordFor(x=>x.WriterPassword,new{@class="form-control",})
+                        @Html.ValidationMessageFor(x=>x.WriterPassword,"",new{@class="text-danger"})
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword4">Tekrar Şifre</label>
+                        @Html.PasswordFor(x=>x.WriterConfirmPassword,new{@class="form-control",})
+                        @Html.ValidationMessageFor(x=>x.WriterConfirmPassword,"",new{@class="text-danger"})
+                    </div>
+                    <button type="submit" class="btn btn-success mr-2">Güncelle</button>
+
+                    <a href="/Dashboard/Index/" class="btn btn-danger">İptal</a>
+                </form>
+            </div>
+        </div>
+    </div>
+}

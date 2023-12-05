@@ -1,0 +1,70 @@
+﻿<nav class="sidebar sidebar-offcanvas" id="sidebar">
+    <ul class="nav">
+       
+        <li class="nav-item nav-profile">
+            <a href="#" class="nav-link">
+            
+                @await Component.InvokeAsync("WriterNavbarAbout")
+           
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/Dashboard/Index/">
+                <span class="menu-title">İstatistiklerim</span>
+                <i class="mdi mdi-chart-line menu-icon"></i>
+            </a>
+        </li>
+      
+        <li class="nav-item">
+            <a class="nav-link" href="/Writer/WriterEditProfile/">
+                <span class="menu-title">Profilim</span>
+                <i class="mdi mdi-contacts menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/Blog/BlogListByWriter/">
+                <span class="menu-title">İçeriklerim</span>
+                <i class="mdi mdi-newspaper menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/Blog/Blogadd/">
+                <span class="menu-title">Yeni içerik oluştur</span>
+                <i class="mdi mdi-new-box menu-icon"></i>
+            </a>
+        </li>
+         <li class="nav-item">
+              <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                <span class="menu-title">Mesajlarım</span>
+                <i class="menu-arrow"></i>
+                <i class="mdi mdi-comment-multiple-outline menu-icon"></i>
+              </a>
+              <div class="collapse" id="ui-basic">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"> <a class="nav-link" href="/Message/InBox">Gelen Kutusu</a></li>
+                  <li class="nav-item"> <a class="nav-link" href="/Message/SendBox/">Giden Kutusu</a></li>
+                    <li class="nav-item"> <a class="nav-link" href="/Message/SendMessage/">Yeni Mesaj Oluştur</a></li>
+                </ul>
+              </div>
+            </li>
+        @*<li class="nav-item">
+            <a class="nav-link" href="pages/tables/basic-table.html">
+                <span class="menu-title">Mesajlarım</span>
+                <i class="mdi mdi-comment-multiple-outline menu-icon"></i>
+            </a>
+        </li>*@
+        <li class="nav-item">
+            <a class="nav-link" href="/Writer/WriterPasswordUpdate/">
+                <span class="menu-title">Ayarlar</span>
+                <i class="mdi mdi-settings menu-icon"></i>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="pages/tables/basic-table.html">
+                <span class="menu-title">Siteye dön</span>
+                <i class="mdi mdi-home menu-icon"></i>
+            </a>
+        </li>
+
+    </ul>
+</nav>
